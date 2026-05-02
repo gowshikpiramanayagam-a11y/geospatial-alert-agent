@@ -1,0 +1,3 @@
+# Core dependencies (all free, pip-installable)
+requests      # For calling the USGS API
+python-dotenv  # For reading .env files locally

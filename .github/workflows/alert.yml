@@ -1,0 +1,53 @@
+name: 🌍 Geospatial Alert Agent
+
+# TRIGGERS:
+# 1. Runs automatically every hour (cron schedule)
+# 2. Can be triggered manually from the GitHub website
+on:
+  schedule:
+    - cron: '0 * * * *'   # Every hour at minute 0
+  workflow_dispatch:      # Manual button in GitHub UI
+
+jobs:
+  run-geospatial-alerts:
+    # Use the latest Ubuntu virtual machine (free for public repos)
+    runs-on: ubuntu-latest
+
+    steps:
+      # STEP 1: Download your repository code onto the VM
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+
+      # STEP 2: Install Python 3.11
+      - name: 🐍 Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      # STEP 3: Install the required Python libraries
+      - name: 📦 Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      # STEP 4: Run the alert agent
+      # We inject secrets as environment variables so the script can send emails
+      - name: 🚀 Run Alert Agent
+        env:
+          EMAIL_USERNAME: ${{ secrets.EMAIL_USERNAME }}
+          EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+          SMTP_SERVER: ${{ secrets.SMTP_SERVER }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          HOURS_BACK: ${{ secrets.HOURS_BACK || '24' }}
+          MIN_MAGNITUDE: ${{ secrets.MIN_MAGNITUDE || '3.0' }}
+          TEST_MODE: ${{ secrets.TEST_MODE || 'false' }}
+        run: python src/alert_agent.py
+
+      # STEP 5: Upload logs as artifacts (so you can download them from GitHub)
+      - name: 📤 Upload logs
+        if: always()  # Run even if previous step failed
+        uses: actions/upload-artifact@v4
+        with:
+          name: alert-logs
+          path: logs/
+          retention-days: 7
