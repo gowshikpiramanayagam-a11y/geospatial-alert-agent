@@ -290,4 +290,4 @@ If you get stuck:
 3. Verify your Gmail App Password (not your regular password).
 4. Open an Issue on GitHub — include your log file.
 
-**Built with 💙 by [Your Name] — Geospatial Engineer**
+**Built with 💙 by Gowshik P — Geospatial Engineer**
