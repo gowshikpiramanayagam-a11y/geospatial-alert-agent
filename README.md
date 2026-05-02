@@ -3,7 +3,7 @@
 > **Production-grade automated pipeline that polls live USGS earthquake data, performs spatial joins against infrastructure assets, and sends real-time email alerts.**
 
 [![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-Automated-blue?logo=githubactions)](https://github.com/features/actions)
-[![Python](https://img.shields.io/badge/Python-3.11-blue?logo=python)](https://python.org)
+[![Python](https://img.shields.io/badge/Python-3.14-blue?logo=python)](https://python.org)
 [![USGS API](https://img.shields.io/badge/Data%20Source-USGS%20Earthquake%20API-green)](https://earthquake.usgs.gov/fdsnws/event/1/)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
@@ -62,7 +62,7 @@ geospatial-alert-agent/
 
 ### 1. Install Prerequisites (Free)
 - **VS Code** → [Download](https://code.visualstudio.com/)
-- **Python 3.11** → [Download](https://www.python.org/downloads/)
+- **Python 3.14** → [Download](https://www.python.org/downloads/)
 - **Git** → [Download](https://git-scm.com/downloads)
 
 ### 2. Clone / Open the Project
